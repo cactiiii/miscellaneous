@@ -13,7 +13,10 @@ function getIp(){
     done
 }
 
-ip="10.18.15.19"
+ip=`getIp`
+addr=`whoami`@$ip:`pwd`/$0
 export PS1="[\u@$ip:\w]$ "
 
-alias vi="vim -u /PATH/TO/YOUR/vimrc"
+alias vim='vim -u "/data/kaicao/.vimck"  -N'
+alias vi='vim'
+
