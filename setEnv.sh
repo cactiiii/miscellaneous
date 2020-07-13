@@ -6,7 +6,7 @@ function getIp(){
     ipStrs=`echo $ifStr | awk -F $' ' '{print $2;}'`
     IFS=$' \t\n'
     for ipStr in $ipStrs; do
-        if [ $ipStr != '' ] && [[ $ipStr != '127.*' ]]; then
+        if [ "$ipStr" != '' ] && ! [[ $ipStr =~ 127.* ]] && ! [[ $ipStr =~ 172.* ]]; then
             echo $ipStr
             break
         fi
