@@ -1,0 +1,52 @@
+#!/usr/bin/expect
+
+set target [lindex $argv 0]
+set target_user ""
+set target_ip ""
+set target_pw ""
+set target_home ""
+set info [dict create]
+
+#read list
+set fp [open "host_list" r]
+set list [split [read $fp] "\n"]
+close $fp
+
+#parse list
+foreach line $list {
+	if {[regexp -- {^#.*} $line]} {
+		#puts "$line is ignored"
+		continue
+	} elseif {[regexp {(\S+)\ *(\S+)\ *(\S+)\ *(\S+)} $line match user ip passwd home]} {
+		dict set info "$user@$ip" [list $user $ip $passwd $home]
+	}
+}
+#puts [dict get $info]
+
+#get target info
+if {[dict exists $info $target]} {
+	global target_user
+	global target_ip
+	global target_pw
+	global target_home
+	set target_info [dict get $info $target]
+	set target_user [lindex $target_info 0]
+	set target_ip [lindex $target_info 1]
+	set target_pw [lindex $target_info 2]
+	set target_home [lindex $target_info 3]
+} else {
+	send_user "ERROR target:$target not found \n"
+	exit
+}
+#puts $target_user
+#puts $target_ip
+#puts $target_pw
+
+#connect
+spawn ssh rd@$target_ip
+expect "$"
+send "su $target_user \r"
+expect "Password:"
+send "$target_pw\r"
+send "cd $target_home; source setEnv.sh \r"
+interact
