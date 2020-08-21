@@ -28,3 +28,6 @@ set ignorecase
 set noerrorbells
 set novisualbell
 set background=dark
+
+"状态栏
+set laststatus=2
