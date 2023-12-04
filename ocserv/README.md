@@ -6,4 +6,6 @@ for ocserv version 1.2.2
 
 安装iptables：yum install iptables-services
 
+iptables配置路径：/etc/sysconfig/iptables
+
 
