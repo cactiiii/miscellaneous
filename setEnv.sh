@@ -2,7 +2,7 @@
 
 function getIp(){
     IFS=$' \t'
-    ifStr=`ifconfig | grep inet`
+    ifStr=`ifconfig | grep 'inet '`
     ipStrs=`echo $ifStr | awk -F $' ' '{print $2;}'`
     IFS=$' \t\n'
     for ipStr in $ipStrs; do
