@@ -29,6 +29,8 @@ COMMIT
 -A INPUT -p tcp -m tcp -i eth0 --dport 443 -j ACCEPT
 # ACCEPT OpenConnect UPD From WAN
 -A INPUT -p udp -m udp -i eth0 --dport 443 -j ACCEPT
+# ACCEPT nginx server requests
+-A INPUT -p tcp -m tcp -i eth0 --dport 80 -j ACCEPT
 # DROP wan traffic
 -A INPUT -i eth0 -j DROP
 
