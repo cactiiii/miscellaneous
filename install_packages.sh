@@ -1,3 +1,5 @@
+set -x
+
 yum install git
 yum install gcc-c++
 yum install nettle-devel
@@ -16,3 +18,10 @@ yum install nodejs
 yum install npm
 npm install hexo
 npm install hexo-pdf
+
+mkdir -p ~/downloads
+cd ~/downloads
+wget https://www.infradead.org/ocserv/download/ocserv-1.4.0.tar.xz
+cd -
+
+adduser -U -m ocserv
